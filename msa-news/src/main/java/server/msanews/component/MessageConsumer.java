@@ -12,7 +12,7 @@ public class MessageConsumer {
     public void writeReviewHandler(String message) {
 
         //add news point service logic
-        System.out.println("add service : "+message);
+        System.out.println("add service : "+ message);
     }
 
 
