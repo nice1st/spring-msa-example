@@ -19,7 +19,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 @Configuration
 @EnableAuthorizationServer
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "cyh.example")
 public class AuthConfiguration extends AuthorizationServerConfigurerAdapter {
     
     @Autowired
