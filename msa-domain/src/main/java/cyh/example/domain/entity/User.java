@@ -1,4 +1,4 @@
-package server.msaauth.security;
+package cyh.example.domain.entity;
 
 import java.util.Date;
 

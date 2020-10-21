@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import cyh.example.domain.entity.User;
+import cyh.example.domain.repository.UserDao;
+
 @Service ("UserInformationService")
 public class UserInformationService implements UserDetailsService {
 

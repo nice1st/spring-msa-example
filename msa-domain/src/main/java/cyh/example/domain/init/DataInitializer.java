@@ -1,4 +1,4 @@
-package server.msaauth.init;
+package cyh.example.domain.init;
 
 import java.util.Date;
 
@@ -10,8 +10,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import server.msaauth.security.User;
-import server.msaauth.security.UserDao;
+import cyh.example.domain.entity.User;
+import cyh.example.domain.repository.UserDao;
 
 @Component
 public class DataInitializer implements ApplicationRunner {
