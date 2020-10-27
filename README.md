@@ -11,3 +11,10 @@
  # 추후 프로젝트 설계 참고
  
  * https://woowabros.github.io/study/2019/07/01/multi-module.html
+
+# 빌드 & 배포
+
+* window 환경에서 docker toolbox 이용해 docker 설치 함
+* jenkins, rabbitmq 컨테이너 실행
+* root + subproject 에 Jenkinsfile pipeline 작성
+* root + subproject 에 Dockerfile build script 작성
