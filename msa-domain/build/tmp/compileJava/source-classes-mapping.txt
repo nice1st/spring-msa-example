@@ -1,6 +1,0 @@
-cyh/example/domain/repository/UserDao.java
- cyh.example.domain.repository.UserDao
-cyh/example/domain/entity/User.java
- cyh.example.domain.entity.User
-cyh/example/domain/init/DataInitializer.java
- cyh.example.domain.init.DataInitializer

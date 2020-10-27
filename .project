@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>msa-example</name>
+	<name>spring-msa-example</name>
 	<comment>Project spring-msa-exsample created by Buildship.</comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1603245003016</id>
+			<id>0</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
