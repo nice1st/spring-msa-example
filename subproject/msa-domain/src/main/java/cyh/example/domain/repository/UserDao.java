@@ -7,5 +7,5 @@ import cyh.example.domain.entity.User;
 
 @Repository ("UserDao")
 public interface UserDao extends JpaRepository<User, Integer> {
-    User findByUsername(String username);
+    User findByUserId(String userId);
 }

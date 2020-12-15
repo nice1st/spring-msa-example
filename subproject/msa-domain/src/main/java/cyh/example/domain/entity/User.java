@@ -20,15 +20,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_name", length = 20, unique = true, nullable = false)
-    private String username;
+    @Column(name = "user_id", length = 20, unique = true, nullable = false)
+    private String userId;
 
-    @Column(length = 400, nullable = false)
     private String password;
 
-    @Column(name = "user_type", nullable = false)
+    @Column(name = "user_type")
     private int userType;
-    
-    @Column(nullable = false)
-    private Date date;
 }

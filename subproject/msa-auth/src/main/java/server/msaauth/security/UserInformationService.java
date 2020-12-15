@@ -24,7 +24,7 @@ public class UserInformationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        User user = UserDao.findByUsername(username);
+        User user = UserDao.findByUserId(username);
 
         // 저장된 ID가 없을때 throw 시켜줍니다. 
         if(user == null) {
@@ -38,20 +38,21 @@ public class UserInformationService implements UserDetailsService {
 
         UserInformation loginUser  = new UserInformation();
 
-        List<GrantedAuthority> Authoritylist = new ArrayList<>();
+        List<GrantedAuthority> authoritylist = new ArrayList<>();
         switch(user.getUserType()) {
             case 0 :
                 // admin
-                Authoritylist.add(new SimpleGrantedAuthority("ADMIN"));
+                authoritylist.add(new SimpleGrantedAuthority("ADMIN"));
+                break;
             case 1 :
                 // user
-                Authoritylist.add(new SimpleGrantedAuthority("USER"));
-            break;
+                authoritylist.add(new SimpleGrantedAuthority("USER"));
+                break;
         }
 
-        loginUser.setUsername(user.getUsername());
+        loginUser.setUsername(user.getUserId());
         loginUser.setPassword(user.getPassword());
-        loginUser.setAuthorities(Authoritylist);
+        loginUser.setAuthorities(authoritylist);
         
         return loginUser;
     }

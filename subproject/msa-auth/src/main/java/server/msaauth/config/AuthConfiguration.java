@@ -1,49 +1,69 @@
 package server.msaauth.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import server.msaauth.security.UserInformationService;
 
 @Configuration
+@EnableAuthorizationServer
 public class AuthConfiguration extends AuthorizationServerConfigurerAdapter {
-    
-    @Autowired
-    private ClientDetailsService clientDetailsService;
     
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
     private ResourceServerProperties resourceServerProperties;
+    
+    @Autowired
+    private UserInformationService userInformationService;
 
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        CorsFilter filter = new CorsFilter(corsConfigurationSource());
+        security.addTokenEndpointAuthenticationFilter(filter);
+        security.checkTokenAccess("permitAll()");
+	}
+	
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         // 인증 과정 endpoint에 대한 설정을 해줍니다. 
         super.configure(endpoints);
-        endpoints.accessTokenConverter(jwtAccessTokenConverter()).authenticationManager(authenticationManager);
+        endpoints.accessTokenConverter(this.jwtAccessTokenConverter()).userDetailsService(this.userInformationService).authenticationManager(this.authenticationManager);
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(clientDetailsService);
-    }
-
-    @Bean
-    @Primary
-    public JdbcClientDetailsService JdbcClientDetailsService(DataSource dataSource) {
-        // Jdbc(H2 데이터베이스)를 이용한 Oauth client 정보등록을 위한 설정입니다.
-        return new JdbcClientDetailsService(dataSource);
+        clients.inMemory()
+            .withClient("msa_auth_web")
+            .authorizedGrantTypes("password", "refresh_token")
+            .secret("{noop}websecret")
+            .authorities("ROLE_USER")
+            .scopes("read", "write")
+            .accessTokenValiditySeconds(600) // 10분
+            .refreshTokenValiditySeconds(36_000) // 10시간
+        .and()
+            .withClient("msa_auth_api")
+            .authorizedGrantTypes("password", "refresh_token")
+            .secret("{noop}apisecret")
+            .authorities("ROLE_USER")
+            .scopes("read", "write")
+            .accessTokenValiditySeconds(3_600)
+            .refreshTokenValiditySeconds(360_000)
+        ;
     }
 
     @Bean
@@ -53,5 +73,17 @@ public class AuthConfiguration extends AuthorizationServerConfigurerAdapter {
         accessTokenConverter.setSigningKey(resourceServerProperties.getJwt().getKeyValue());
 
         return accessTokenConverter;
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin(CorsConfiguration.ALL);
+        corsConfiguration.addAllowedHeader(CorsConfiguration.ALL);
+        corsConfiguration.addAllowedMethod(CorsConfiguration.ALL);
+        corsConfiguration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return source;
     }
 }
