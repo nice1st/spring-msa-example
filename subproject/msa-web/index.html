@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- <script src="./dist/bundle.js"></script> -->
+        <script src="./dist/bundle.js"></script>
     </head>
     <body>
         <h2>LOGIN</h2>
@@ -19,19 +19,6 @@
     <script>
         onLogin = (event) => {
             event.preventDefault();
-            fetch("http://localhost:18095/oauth/token", {
-                method: "POST",
-                headers: {
-                    "Authorization": "Basic " + btoa("msa_auth_web:websecret"),
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: new URLSearchParams({
-                    "grant_type": "password",
-                    "scope": "write",
-                    "username": document.getElementById("id").value,
-                    "password": document.getElementById("password").value
-                }).toString()
-            }).then(res => res.json()).then(res => console.log(res));
         }
     </script>
 </html>
