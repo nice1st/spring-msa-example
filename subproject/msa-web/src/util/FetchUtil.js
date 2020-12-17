@@ -1,10 +1,12 @@
 export const BASE_URL = process.env.BASE_URL;
 export const AUTH_URL = process.env.AUTH_URL;
+export let tocken = undefined;
 
 export default class FetchUtil {
     
     static #defaultHeaders = {
-        "Content-Type": "application/json; charset=UTF-8"
+        "Content-Type": "application/json; charset=UTF-8",
+        "Authorization": "Basic " + tocken,
     };
 
     static getBaseUrl(url) {

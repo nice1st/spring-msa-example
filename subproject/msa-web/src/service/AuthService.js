@@ -1,4 +1,4 @@
-import FetchUtil, {AUTH_URL} from '../util/FetchUtil';
+import {AUTH_URL, tocken} from '../util/FetchUtil';
 
 export default class AuthService {
     static instance = null;
@@ -11,8 +11,10 @@ export default class AuthService {
         return AuthService.instance;
     }
 
-    onAuth = (id, password) => {
-        return fetch(`${AUTH_URL}/oauth/token`, {
+    onLogin(id, password) {
+        const self = this;
+
+        const response = fetch(`${AUTH_URL}/oauth/token`, {
             method: "POST",
             headers: {
                 "Authorization": "Basic " + btoa("msa_auth_web:websecret"),
@@ -24,6 +26,32 @@ export default class AuthService {
                 "username": id,
                 "password": password
             }).toString()
-        }).then(res => res.json());
+        }).then(res => res.json())
+        .then(self.onLoginSuccess)
+        .catch(error => {
+            // ... 로그인 실패 처리
+        });
+
+        return response;
+    }
+    
+    onSilentRefresh() {
+        const self = this;
+
+        const response = fetch(`${AUTH_URL}/silent-refresh`, {
+            // something
+        }).then(self.onLoginSuccess)
+        .catch(error => {
+            // ... 로그인 실패 처리
+        });
+    }
+
+    onLoginSuccess(response) {
+
+        response.then(res => {
+            tocken = res.access_token;
+        })
+
+        return response;
     }
 }

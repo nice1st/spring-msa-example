@@ -16,7 +16,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import server.msaauth.security.UserInformationService;
+import server.msaauth.filter.TokenCookieCreationFilter;
+import server.msaauth.service.UserInformationService;
 
 @Configuration
 @EnableAuthorizationServer
@@ -33,8 +34,8 @@ public class AuthConfiguration extends AuthorizationServerConfigurerAdapter {
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        CorsFilter filter = new CorsFilter(corsConfigurationSource());
-        security.addTokenEndpointAuthenticationFilter(filter);
+        security.addTokenEndpointAuthenticationFilter(new TokenCookieCreationFilter());
+        security.addTokenEndpointAuthenticationFilter(new CorsFilter(corsConfigurationSource()));
         security.checkTokenAccess("permitAll()");
 	}
 	
@@ -42,7 +43,11 @@ public class AuthConfiguration extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         // 인증 과정 endpoint에 대한 설정을 해줍니다. 
         super.configure(endpoints);
-        endpoints.accessTokenConverter(this.jwtAccessTokenConverter()).userDetailsService(this.userInformationService).authenticationManager(this.authenticationManager);
+        endpoints
+            .accessTokenConverter(this.jwtAccessTokenConverter())
+            .userDetailsService(this.userInformationService)
+            .authenticationManager(this.authenticationManager)
+        ;
     }
 
     @Override
@@ -75,7 +80,6 @@ public class AuthConfiguration extends AuthorizationServerConfigurerAdapter {
         return accessTokenConverter;
     }
 
-    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin(CorsConfiguration.ALL);

@@ -18,7 +18,9 @@
 
     <script>
         onLogin = (event) => {
-            
+            event.preventDefault();
+            const response = service.AuthService.getInstance().onLogin(document.getElementById("id").value, document.getElementById("password").value);
+            response.then(res => console.log(res));
         }
     </script>
 </html>
