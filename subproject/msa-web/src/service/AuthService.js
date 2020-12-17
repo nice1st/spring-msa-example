@@ -8,7 +8,7 @@ export default class AuthService {
             AuthService.instance = new AuthService();
         }
 
-        return this.instance;
+        return AuthService.instance;
     }
 
     onAuth = (id, password) => {

@@ -1,5 +1,5 @@
-export const BASE_URL = API_URL;
-export const AUTH_URL = AUTL_URL;
+export const BASE_URL = process.env.BASE_URL;
+export const AUTH_URL = process.env.AUTH_URL;
 
 export default class FetchUtil {
     
@@ -11,7 +11,7 @@ export default class FetchUtil {
         return url.startsWith("http") ? "" : BASE_URL;
     }
 
-    static getBaseUrl(headers) {
+    static getHeaders(headers) {
         return Object.assign({}, FetchUtil.#defaultHeaders, headers);
     }
 
