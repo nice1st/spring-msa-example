@@ -1,4 +1,4 @@
-package server.msaauth.service;
+package server.msaauth.security.entity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package server.msaauth.service;
+package server.msaauth.security.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import server.msaauth.security.entity.UserInformation;
+
 import cyh.example.domain.entity.User;
 import cyh.example.domain.repository.UserDao;
 
-@Service ("UserInformationService")
+@Service
 public class UserInformationService implements UserDetailsService {
 
     @Resource (name="UserDao")
