@@ -1,12 +1,33 @@
 package server.msauser.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import cyh.core.response.CommonResponse;
+import cyh.domain.entity.User;
 
 @RestController
 public class UserController {
-    @RequestMapping("/")
-    public String getUsers() {
-        return "User Information.";
+    
+    @GetMapping("/")
+    public CommonResponse getUsers() {
+        
+        return CommonResponse.builder()
+            .code("OK")
+            .status(200)
+            .message("user list")
+            .build();
+    }
+
+    @PostMapping("/user")
+    public CommonResponse postUser(@RequestBody User user) {
+        
+        return CommonResponse.builder()
+            .code("OK")
+            .status(200)
+            .message("User Information.")
+            .build();
     }
 }

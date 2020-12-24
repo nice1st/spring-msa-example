@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan("cyh.example.*")
-@EnableJpaRepositories("cyh.example.*")
+@EntityScan("cyh.domain.*")
+@EnableJpaRepositories("cyh.domain.*")
 public class MsaAuthApplication {
 
 	public static void main(String[] args) {

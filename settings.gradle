@@ -1,4 +1,6 @@
 rootProject.name = 'spring-msa-example'
+include 'msa-core'
+project(':msa-core').projectDir = file('subproject/msa-core')
 include 'msa-domain'
 project(':msa-domain').projectDir = file('subproject/msa-domain')
 include 'msa-eureka'

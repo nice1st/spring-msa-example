@@ -1,4 +1,4 @@
-package cyh.example.domain.entity;
+package cyh.domain.entity;
 
 import java.util.Date;
 

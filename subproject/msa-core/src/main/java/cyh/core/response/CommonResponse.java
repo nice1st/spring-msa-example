@@ -1,4 +1,4 @@
-package server.msaauth.core;
+package cyh.core.response;
 
 import lombok.Builder;
 import lombok.Getter;

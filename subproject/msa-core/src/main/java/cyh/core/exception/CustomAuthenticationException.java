@@ -1,4 +1,4 @@
-package server.msaauth.exception;
+package cyh.core.exception;
 
 public class CustomAuthenticationException extends RuntimeException {
 

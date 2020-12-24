@@ -1,7 +1,7 @@
 package server.msaauth.controller;
 
-import server.msaauth.core.CommonResponse;
-import server.msaauth.exception.LoginFailedException;
+import cyh.core.response.CommonResponse;
+import cyh.core.exception.LoginFailedException;
 import server.msaauth.security.entity.UserInformation;
 import server.msaauth.security.provider.JwtAuthToken;
 import server.msaauth.service.LoginService;

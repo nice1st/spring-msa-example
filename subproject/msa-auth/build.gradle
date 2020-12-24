@@ -1,4 +1,5 @@
 dependencies {
+	implementation project(':msa-core')
 	implementation project(':msa-domain')
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'

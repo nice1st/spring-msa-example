@@ -1,6 +1,6 @@
 package server.msaauth.security.provider;
 
-import server.msaauth.exception.TokenValidFailedException;
+import cyh.core.exception.TokenValidFailedException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

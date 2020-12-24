@@ -1,7 +1,7 @@
 package server.msaauth.security.config;
 
-import server.msaauth.exception.JwtAccessDeniedHandler;
-import server.msaauth.exception.JwtAuthenticationEntryPoint;
+import cyh.core.exception.JwtAccessDeniedHandler;
+import cyh.core.exception.JwtAuthenticationEntryPoint;
 import server.msaauth.security.provider.JwtAuthTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
