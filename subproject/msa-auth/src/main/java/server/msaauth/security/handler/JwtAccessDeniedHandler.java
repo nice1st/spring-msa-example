@@ -1,4 +1,4 @@
-package cyh.core.exception;
+package server.msaauth.security.handler;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
