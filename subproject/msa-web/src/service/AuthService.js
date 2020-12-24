@@ -14,7 +14,7 @@ export default class AuthService {
     onLogin(id, password) {
         const self = this;
 
-        const response = fetch(`${AUTH_URL}/oauth/token/login`, {
+        const response = fetch(`${AUTH_URL}/auth/token/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=UTF-8"
