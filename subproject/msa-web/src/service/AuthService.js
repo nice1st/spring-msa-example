@@ -14,18 +14,15 @@ export default class AuthService {
     onLogin(id, password) {
         const self = this;
 
-        const response = fetch(`${AUTH_URL}/oauth/token`, {
+        const response = fetch(`${AUTH_URL}/oauth/token/login`, {
             method: "POST",
             headers: {
-                "Authorization": "Basic " + btoa("msa_auth_web:websecret"),
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/json;charset=UTF-8"
             },
-            body: new URLSearchParams({
-                "grant_type": "password",
-                "scope": "write",
-                "username": id,
+            body: JSON.stringify({
+                "id": id,
                 "password": password
-            }).toString()
+            })
         }).then(res => res.json())
         .then(self.onLoginSuccess)
         .catch(error => {
