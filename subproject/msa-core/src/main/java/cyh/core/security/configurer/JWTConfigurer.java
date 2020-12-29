@@ -1,11 +1,12 @@
-package server.msaauth.security.config;
+package cyh.core.security.configurer;
 
-import server.msaauth.security.filter.JWTFilter;
-import server.msaauth.security.provider.JwtAuthTokenProvider;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import cyh.core.security.provider.JwtAuthTokenProvider;
+import cyh.core.security.filter.JWTFilter;
 
 public class JWTConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 

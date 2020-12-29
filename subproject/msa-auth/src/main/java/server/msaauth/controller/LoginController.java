@@ -1,17 +1,19 @@
 package server.msaauth.controller;
 
-import cyh.core.response.CommonResponse;
-import cyh.core.exception.LoginFailedException;
-import server.msaauth.security.entity.UserInformation;
-import server.msaauth.security.provider.JwtAuthToken;
-import server.msaauth.service.LoginService;
-import server.msaauth.dto.LoginRequestDTO;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import cyh.core.response.CommonResponse;
+import cyh.core.security.provider.JwtAuthToken;
+import cyh.core.exception.LoginFailedException;
+import server.msaauth.security.entity.UserInformation;
+import server.msaauth.service.LoginService;
+import server.msaauth.dto.LoginRequestDTO;
+// import server.msaauth.security.provider.JwtAuthToken;
 
 @Slf4j
 @RestController

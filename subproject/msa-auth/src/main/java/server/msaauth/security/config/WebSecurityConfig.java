@@ -1,10 +1,10 @@
 package server.msaauth.security.config;
 
-import server.msaauth.security.handler.JwtAccessDeniedHandler;
-import server.msaauth.security.handler.JwtAuthenticationEntryPoint;
-import server.msaauth.security.provider.JwtAuthTokenProvider;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,6 +15,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import cyh.core.security.configurer.JWTConfigurer;
+import cyh.core.security.handler.JwtAccessDeniedHandler;
+import cyh.core.security.handler.JwtAuthenticationEntryPoint;
+import cyh.core.security.provider.JwtAuthTokenProvider;
+// import server.msaauth.security.handler.JwtAccessDeniedHandler;
+// import server.msaauth.security.handler.JwtAuthenticationEntryPoint;
+// import server.msaauth.security.provider.JwtAuthTokenProvider;
+
+@EnableAutoConfiguration
+@ComponentScan(basePackages = "cyh.core.security")
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -57,15 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JWTConfigurer securityConfigurerAdapter() {
         return new JWTConfigurer(jwtAuthTokenProvider);
     }
-
-    // @Bean
-    // public DaoAuthenticationProvider authenticationProvider() {
-    //     // custom user인증 서비스를 사용하기위한 설정입니다. 
-    //     DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-    //     authenticationProvider.setUserDetailsService(userInformationService);
-    //     authenticationProvider.setPasswordEncoder(passwordEncoder());
-    //     return authenticationProvider;
-    // }
 
     @Bean
     public static PasswordEncoder passwordEncoder() {

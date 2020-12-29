@@ -1,7 +1,7 @@
-package server.msaauth.security.filter;
+package cyh.core.security.filter;
 
-import server.msaauth.security.provider.JwtAuthToken;
-import server.msaauth.security.provider.JwtAuthTokenProvider;
+import cyh.core.security.provider.JwtAuthToken;
+import cyh.core.security.provider.JwtAuthTokenProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

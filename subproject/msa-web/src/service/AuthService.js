@@ -1,4 +1,4 @@
-import {AUTH_URL, tocken} from '../util/FetchUtil';
+import FetchUtil, {AUTH_URL} from '../util/FetchUtil';
 
 export default class AuthService {
     static instance = null;
@@ -44,11 +44,11 @@ export default class AuthService {
     }
 
     onLoginSuccess(response) {
-
-        response.then(res => {
-            tocken = res.access_token;
-        })
-
+        try {
+            FetchUtil.token = response.message;
+        } catch (error) {
+            console.error(error);
+        }
         return response;
     }
 }

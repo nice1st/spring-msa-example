@@ -1,4 +1,4 @@
-package server.msaauth.security.provider;
+package cyh.core.security.provider;
 
 import cyh.core.exception.TokenValidFailedException;
 import io.jsonwebtoken.*;

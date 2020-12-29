@@ -1,4 +1,4 @@
-package server.msaauth.security.provider;
+package cyh.core.security.provider;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SecurityException;

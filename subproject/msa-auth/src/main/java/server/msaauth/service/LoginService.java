@@ -1,22 +1,24 @@
 package server.msaauth.service;
 
-import server.msaauth.security.entity.UserInformation;
-import server.msaauth.security.provider.JwtAuthToken;
-import server.msaauth.security.provider.JwtAuthTokenProvider;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import server.msaauth.security.entity.UserInformation;
+import cyh.core.security.provider.JwtAuthToken;
+import cyh.core.security.provider.JwtAuthTokenProvider;
+// import server.msaauth.security.provider.JwtAuthToken;
+// import server.msaauth.security.provider.JwtAuthTokenProvider;
 
 @Slf4j
 @Service
