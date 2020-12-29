@@ -1,4 +1,4 @@
-package server.msaauth.security.handler;
+package cyh.core.handler;
 
 import cyh.core.exception.CustomAuthenticationException;
 import cyh.core.exception.ErrorCode;

@@ -57,7 +57,6 @@ public class LoginService {
     }
 
     public JwtAuthToken createAuthToken(UserInformation user) {
-
         Date expiredDate = Date.from(LocalDateTime.now().plusMinutes(LOGIN_RETENTION_MINUTES).atZone(ZoneId.systemDefault()).toInstant());
         return jwtAuthTokenProvider.createAuthToken(user.getUsername(), "USER", expiredDate);
     }
