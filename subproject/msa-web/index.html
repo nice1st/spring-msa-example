@@ -12,7 +12,8 @@
                 <label for="password">Last name:</label><br>
                 <input type="password" id="password" name="password" value="admin123"><br><br>
                 <input type="submit" value="Submit">
-              </form> 
+            </form> 
+            <button onclick="onClick(event)">쿠키확인</button>
         </section>
     </body>
 
@@ -21,6 +22,10 @@
             event.preventDefault();
             const response = service.AuthService.getInstance().onLogin(document.getElementById("id").value, document.getElementById("password").value);
             response.then(res => console.log(res));
+        }
+
+        onClick = (event) => {
+            
         }
     </script>
 </html>

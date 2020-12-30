@@ -2,6 +2,9 @@ package server.msaauth.controller;
 
 import java.util.Optional;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
@@ -24,19 +27,30 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public CommonResponse login(@RequestBody LoginRequestDTO loginRequestDTO) {
+    public CommonResponse login(HttpServletResponse response
+        , @RequestBody LoginRequestDTO loginRequestDTO
+        , @CookieValue(name = "refreshToken", required = false) String reqRefreshToken) {
+
+        // 쿠키 확인 해보자
+        log.info("---------------");
+        log.info(reqRefreshToken);
+        log.info("---------------");
 
         log.info("login controller");
         Optional<UserInformation> optionalUser = loginService.login(loginRequestDTO.getId(), loginRequestDTO.getPassword());
 
         if (optionalUser.isPresent()) {
-
-            JwtAuthToken jwtAuthToken = (JwtAuthToken) loginService.createAuthToken(optionalUser.get());
-
+            JwtAuthToken refreshToken = (JwtAuthToken) loginService.createAuthToken(optionalUser.get(), 60L);
+            Cookie cookie = new Cookie("refreshToken", refreshToken.getToken());
+            cookie.setMaxAge(60 * 60);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            
+            JwtAuthToken accessToken = (JwtAuthToken) loginService.createAuthToken(optionalUser.get(), 30L);
             return CommonResponse.builder()
                     .code("LOGIN_SUCCESS")
                     .status(200)
-                    .message(jwtAuthToken.getToken())
+                    .message(accessToken.getToken())
                     .build();
 
         } else {

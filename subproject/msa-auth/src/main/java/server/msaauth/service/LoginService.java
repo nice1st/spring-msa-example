@@ -27,7 +27,6 @@ public class LoginService {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtAuthTokenProvider jwtAuthTokenProvider;
-    private final static long LOGIN_RETENTION_MINUTES = 30;
 
     public Optional<UserInformation> login(String id, String password) {
 
@@ -56,7 +55,7 @@ public class LoginService {
         return Optional.ofNullable((UserInformation) authentication.getPrincipal());
     }
 
-    public JwtAuthToken createAuthToken(UserInformation user) {
+    public JwtAuthToken createAuthToken(UserInformation user, long LOGIN_RETENTION_MINUTES) {
         Date expiredDate = Date.from(LocalDateTime.now().plusMinutes(LOGIN_RETENTION_MINUTES).atZone(ZoneId.systemDefault()).toInstant());
         return jwtAuthTokenProvider.createAuthToken(user.getUsername(), "USER", expiredDate);
     }

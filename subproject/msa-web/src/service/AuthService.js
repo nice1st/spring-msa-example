@@ -14,10 +14,12 @@ export default class AuthService {
     onLogin(id, password) {
         const self = this;
 
+        console.log(AUTH_URL);
         const response = fetch(`${AUTH_URL}/auth/token/login`, {
             method: "POST",
+            credentials: 'include',
             headers: {
-                "Content-Type": "application/json;charset=UTF-8"
+                "Content-Type": "application/json;charset=UTF-8",
             },
             body: JSON.stringify({
                 "id": id,
