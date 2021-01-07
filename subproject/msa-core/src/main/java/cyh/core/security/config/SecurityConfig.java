@@ -10,6 +10,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
+    
     @Bean
     public static PasswordEncoder passwordEncoder() {
         // Spring5부터 PasswordEncoder 지정은 필수로 진행해주어야 합니다. 
