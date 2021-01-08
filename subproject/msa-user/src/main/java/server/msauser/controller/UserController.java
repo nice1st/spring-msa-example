@@ -20,6 +20,16 @@ public class UserController {
             .message("user list")
             .build();
     }
+    
+    @GetMapping("/public")
+    public CommonResponse postPublic() {
+        
+        return CommonResponse.builder()
+            .code("OK")
+            .status(200)
+            .message("User public.")
+            .build();
+    }
 
     @PostMapping("/user")
     public CommonResponse postUser(@RequestBody User user) {

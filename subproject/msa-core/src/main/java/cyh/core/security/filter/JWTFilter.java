@@ -19,7 +19,7 @@ import java.util.Optional;
 @Slf4j
 public class JWTFilter extends GenericFilterBean {
 
-   private static final String AUTHORIZATION_HEADER = "x-auth-token";
+   private static final String AUTHORIZATION_HEADER = "Authorization";
 
    private JwtAuthTokenProvider jwtAuthTokenProvider;
 
@@ -34,6 +34,7 @@ public class JWTFilter extends GenericFilterBean {
       HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
       Optional<String> token = resolveToken(httpServletRequest);
 
+      log.info("JWTFilter");
       if (token.isPresent()) {
          JwtAuthToken jwtAuthToken = jwtAuthTokenProvider.convertAuthToken(token.get());
 
@@ -48,6 +49,7 @@ public class JWTFilter extends GenericFilterBean {
 
    private Optional<String> resolveToken(HttpServletRequest request) {
       String authToken = request.getHeader(AUTHORIZATION_HEADER);
+      log.info(authToken);
       if (StringUtils.hasText(authToken)) {
          return Optional.of(authToken);
       } else {

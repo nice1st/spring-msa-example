@@ -7,17 +7,17 @@ export default class FetchUtil {
     static set token(token) {
         TOKEN = token;
     }
-    static #defaultHeaders = {
-        "Content-Type": "application/json; charset=UTF-8",
-        "Authorization": "Basic " + TOKEN,
-    };
 
     static getBaseUrl(url) {
         return url.startsWith("http") ? "" : BASE_URL;
     }
 
     static getHeaders(headers) {
-        return Object.assign({}, FetchUtil.#defaultHeaders, headers);
+        const defaultHeaders = {
+            "Content-Type": "application/json; charset=UTF-8",
+            "Authorization": TOKEN,
+        };
+        return Object.assign({}, defaultHeaders, headers);
     }
 
     static get(url, param = {}, headers = {}) {

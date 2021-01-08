@@ -27,16 +27,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public CommonResponse login(HttpServletResponse response
-        , @RequestBody LoginRequestDTO loginRequestDTO
-        , @CookieValue(name = "refreshToken", required = false) String reqRefreshToken) {
-
-        // 쿠키 확인 해보자
-        log.info("---------------");
-        log.info(reqRefreshToken);
-        log.info("---------------");
-
-        log.info("login controller");
+    public CommonResponse login(HttpServletResponse response, @RequestBody LoginRequestDTO loginRequestDTO) {
         Optional<UserInformation> optionalUser = loginService.login(loginRequestDTO.getId(), loginRequestDTO.getPassword());
 
         if (optionalUser.isPresent()) {
@@ -56,5 +47,17 @@ public class LoginController {
         } else {
             throw new LoginFailedException();
         }
+    }
+
+    @PostMapping("/refresh")
+    public CommonResponse login(@CookieValue(name = "refreshToken", required = false) String reqRefreshToken) {
+            // 쿠키
+            log.info(reqRefreshToken);
+
+            return CommonResponse.builder()
+                    .code("SUCCESS")
+                    .status(200)
+                    .message("")
+                    .build();
     }
 }
