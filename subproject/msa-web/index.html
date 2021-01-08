@@ -4,29 +4,6 @@
         <script src="./dist/service.js"></script>
     </head>
     <body>
-        <h2>LOGIN</h2>
-        <section>
-            <form onsubmit="onLogin(event)">
-                <label for="id">First name:</label><br>
-                <input type="text" id="id" name="userId" value="admin"><br>
-                <label for="password">Last name:</label><br>
-                <input type="password" id="password" name="password" value="admin123"><br><br>
-                <input type="submit" value="Submit">
-            </form> 
-            <button onclick="onRefresh(event)">Refresh</button>
-        </section>
+        <h2>HELLO WORLD!</h2>
     </body>
-
-    <script>
-        onLogin = (event) => {
-            event.preventDefault();
-            const response = service.AuthService.getInstance().onLogin(document.getElementById("id").value, document.getElementById("password").value);
-            response.then(res => console.log(res));
-        }
-
-        onRefresh = (event) => {
-            const response = service.AuthService.getInstance().onSilentRefresh();
-            response.then(res => console.log(res));
-        }
-    </script>
 </html>

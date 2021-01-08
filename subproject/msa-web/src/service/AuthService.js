@@ -14,7 +14,7 @@ export default class AuthService {
     onLogin(id, password) {
         const self = this;
 
-        const response = fetch(`${AUTH_URL}/auth/token/login`, {
+        return fetch(`${AUTH_URL}/auth/token/login`, {
             method: "POST",
             credentials: 'include',
             headers: {
@@ -24,36 +24,31 @@ export default class AuthService {
                 "id": id,
                 "password": password
             })
-        }).then(res => res.json())
-        .then(self.onLoginSuccess)
-        .catch(error => {
-            // ... 로그인 실패 처리
-        });
-
-        return response;
+        }).then(self.onResponse);
     }
     
     onSilentRefresh() {
         const self = this;
 
-        const response = fetch(`${AUTH_URL}/auth/token/refresh`, {
+        return fetch(`${AUTH_URL}/auth/token/refresh`, {
             method: "POST",
             credentials: 'include'
-        }).then(res => res.json())
-        .then(self.onLoginSuccess)
-        .catch(error => {
-            // ... 로그인 실패 처리
-        });
-
-        return response;
+        }).then(self.onResponse);
     }
 
-    onLoginSuccess(response) {
-        try {
-            FetchUtil.token = response.message;
-        } catch (error) {
-            console.error(error);
+    onResponse(response) {
+        if (response.status != 200) {
+            throw response;
         }
-        return response;
+        
+        return response.json()
+        .then(response => {
+            try {
+                FetchUtil.token = response.message;
+            } catch (error) {
+                console.error(error);
+            }
+            return response;
+        });
     }
 }
