@@ -14,9 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import cyh.core.response.CommonResponse;
 import cyh.core.security.provider.JwtAuthToken;
 import cyh.core.exception.LoginFailedException;
+import cyh.core.exception.TokenValidFailedException;
 import server.msaauth.service.LoginService;
 import server.msaauth.dto.LoginRequestDTO;
-// import server.msaauth.security.provider.JwtAuthToken;
 
 @Slf4j
 @RestController
@@ -55,21 +55,24 @@ public class LoginController {
 
     @PostMapping("/refresh")
     public CommonResponse refresh(HttpServletResponse response, @CookieValue(name = "refreshToken", required = false) String reqRefreshToken) {
-            // 쿠키
-            JwtAuthToken jwtAuthToken = loginService.convertAuthToken(reqRefreshToken);
-            UserDetails user = loginService.getUserInformationByToken(jwtAuthToken);
-            // user.getAuthorities().stream().forEach((authority) -> {
-            //     log.info(authority.getAuthority());
-            // });
+        if (reqRefreshToken == null || reqRefreshToken.isEmpty()) {
+            throw new TokenValidFailedException();
+        }
+        // 쿠키
+        JwtAuthToken jwtAuthToken = loginService.convertAuthToken(reqRefreshToken);
+        UserDetails user = loginService.getUserInformationByToken(jwtAuthToken);
+        // user.getAuthorities().stream().forEach((authority) -> {
+        //     log.info(authority.getAuthority());
+        // });
 
-            JwtAuthToken refreshToken = loginService.createAuthToken(user, 60L);
-            JwtAuthToken accessToken = loginService.createAuthToken(user, 30L);
-            
-            addTokenToCookie(response, refreshToken);
-            return CommonResponse.builder()
-                    .code("REFRESH_SUCCESS")
-                    .status(200)
-                    .message(accessToken.getToken())
-                    .build();
+        JwtAuthToken refreshToken = loginService.createAuthToken(user, 60L);
+        JwtAuthToken accessToken = loginService.createAuthToken(user, 30L);
+        
+        addTokenToCookie(response, refreshToken);
+        return CommonResponse.builder()
+                .code("REFRESH_SUCCESS")
+                .status(200)
+                .message(accessToken.getToken())
+                .build();
     }
 }
