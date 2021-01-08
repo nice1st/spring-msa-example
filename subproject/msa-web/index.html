@@ -13,7 +13,7 @@
                 <input type="password" id="password" name="password" value="admin123"><br><br>
                 <input type="submit" value="Submit">
             </form> 
-            <button onclick="onClick(event)">쿠키확인</button>
+            <button onclick="onRefresh(event)">Refresh</button>
         </section>
     </body>
 
@@ -24,8 +24,9 @@
             response.then(res => console.log(res));
         }
 
-        onClick = (event) => {
-            
+        onRefresh = (event) => {
+            const response = service.AuthService.getInstance().onSilentRefresh();
+            response.then(res => console.log(res));
         }
     </script>
 </html>

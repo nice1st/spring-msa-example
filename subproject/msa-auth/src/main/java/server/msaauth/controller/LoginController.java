@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import cyh.core.response.CommonResponse;
 import cyh.core.security.provider.JwtAuthToken;
 import cyh.core.exception.LoginFailedException;
-import server.msaauth.security.entity.UserInformation;
 import server.msaauth.service.LoginService;
 import server.msaauth.dto.LoginRequestDTO;
 // import server.msaauth.security.provider.JwtAuthToken;
@@ -26,18 +26,22 @@ public class LoginController {
 
     private final LoginService loginService;
 
+    private void addTokenToCookie(HttpServletResponse response, JwtAuthToken token) {
+        Cookie cookie = new Cookie("refreshToken", token.getToken());
+        cookie.setMaxAge(60 * 60);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
+
     @PostMapping("/login")
     public CommonResponse login(HttpServletResponse response, @RequestBody LoginRequestDTO loginRequestDTO) {
-        Optional<UserInformation> optionalUser = loginService.login(loginRequestDTO.getId(), loginRequestDTO.getPassword());
+        Optional<UserDetails> optionalUser = loginService.login(loginRequestDTO.getId(), loginRequestDTO.getPassword());
 
         if (optionalUser.isPresent()) {
-            JwtAuthToken refreshToken = (JwtAuthToken) loginService.createAuthToken(optionalUser.get(), 60L);
-            Cookie cookie = new Cookie("refreshToken", refreshToken.getToken());
-            cookie.setMaxAge(60 * 60);
-            cookie.setPath("/");
-            response.addCookie(cookie);
+            JwtAuthToken refreshToken = loginService.createAuthToken(optionalUser.get(), 60L);
+            JwtAuthToken accessToken = loginService.createAuthToken(optionalUser.get(), 30L);
             
-            JwtAuthToken accessToken = (JwtAuthToken) loginService.createAuthToken(optionalUser.get(), 30L);
+            addTokenToCookie(response, refreshToken);
             return CommonResponse.builder()
                     .code("LOGIN_SUCCESS")
                     .status(200)
@@ -50,14 +54,22 @@ public class LoginController {
     }
 
     @PostMapping("/refresh")
-    public CommonResponse login(@CookieValue(name = "refreshToken", required = false) String reqRefreshToken) {
+    public CommonResponse refresh(HttpServletResponse response, @CookieValue(name = "refreshToken", required = false) String reqRefreshToken) {
             // 쿠키
-            log.info(reqRefreshToken);
+            JwtAuthToken jwtAuthToken = loginService.convertAuthToken(reqRefreshToken);
+            UserDetails user = loginService.getUserInformationByToken(jwtAuthToken);
+            // user.getAuthorities().stream().forEach((authority) -> {
+            //     log.info(authority.getAuthority());
+            // });
 
+            JwtAuthToken refreshToken = loginService.createAuthToken(user, 60L);
+            JwtAuthToken accessToken = loginService.createAuthToken(user, 30L);
+            
+            addTokenToCookie(response, refreshToken);
             return CommonResponse.builder()
-                    .code("SUCCESS")
+                    .code("REFRESH_SUCCESS")
                     .status(200)
-                    .message("")
+                    .message(accessToken.getToken())
                     .build();
     }
 }

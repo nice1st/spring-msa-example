@@ -14,7 +14,6 @@ export default class AuthService {
     onLogin(id, password) {
         const self = this;
 
-        console.log(AUTH_URL);
         const response = fetch(`${AUTH_URL}/auth/token/login`, {
             method: "POST",
             credentials: 'include',
@@ -37,12 +36,16 @@ export default class AuthService {
     onSilentRefresh() {
         const self = this;
 
-        const response = fetch(`${AUTH_URL}/silent-refresh`, {
-            // something
-        }).then(self.onLoginSuccess)
+        const response = fetch(`${AUTH_URL}/auth/token/refresh`, {
+            method: "POST",
+            credentials: 'include'
+        }).then(res => res.json())
+        .then(self.onLoginSuccess)
         .catch(error => {
             // ... 로그인 실패 처리
         });
+
+        return response;
     }
 
     onLoginSuccess(response) {

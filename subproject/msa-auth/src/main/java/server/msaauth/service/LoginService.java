@@ -9,16 +9,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import server.msaauth.security.entity.UserInformation;
 import cyh.core.security.provider.JwtAuthToken;
 import cyh.core.security.provider.JwtAuthTokenProvider;
-// import server.msaauth.security.provider.JwtAuthToken;
-// import server.msaauth.security.provider.JwtAuthTokenProvider;
 
 @Slf4j
 @Service
@@ -28,7 +26,7 @@ public class LoginService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtAuthTokenProvider jwtAuthTokenProvider;
 
-    public Optional<UserInformation> login(String id, String password) {
+    public Optional<UserDetails> login(String id, String password) {
 
         UsernamePasswordAuthenticationToken authenticationToken;
         try {
@@ -50,13 +48,22 @@ public class LoginService {
         }
 
         //로그인 성공하면 인증 객체 생성 및 스프링 시큐리티 설정
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        // SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return Optional.ofNullable((UserInformation) authentication.getPrincipal());
+        return Optional.ofNullable((UserDetails) authentication.getPrincipal());
     }
 
-    public JwtAuthToken createAuthToken(UserInformation user, long LOGIN_RETENTION_MINUTES) {
+    public JwtAuthToken createAuthToken(UserDetails user, long LOGIN_RETENTION_MINUTES) {
         Date expiredDate = Date.from(LocalDateTime.now().plusMinutes(LOGIN_RETENTION_MINUTES).atZone(ZoneId.systemDefault()).toInstant());
         return jwtAuthTokenProvider.createAuthToken(user.getUsername(), "USER", expiredDate);
+    }
+
+    public JwtAuthToken convertAuthToken(String authToken) {
+        return jwtAuthTokenProvider.convertAuthToken(authToken);
+    }
+
+    public UserDetails getUserInformationByToken(JwtAuthToken authToken) {
+        Authentication authentication = jwtAuthTokenProvider.getAuthentication(authToken);
+        return (UserDetails) authentication.getPrincipal();
     }
 }

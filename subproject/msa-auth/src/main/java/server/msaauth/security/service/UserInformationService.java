@@ -35,7 +35,7 @@ public class UserInformationService implements UserDetailsService {
     }
     
     // UserInformation 값 주입 해 줍니다.
-    public UserInformation makeLoginUser(User user) {
+    public UserDetails makeLoginUser(User user) {
 
         UserInformation loginUser  = new UserInformation();
 
