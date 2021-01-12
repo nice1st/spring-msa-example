@@ -1,0 +1,40 @@
+server: 
+    port: 18001
+
+spring:
+    application: 
+        name: msa-log-service
+    profiles: 
+        active: local
+    jpa: 
+        database: mysql
+        show-sql: true # API 호출시, SQL 문을 콘솔에 출력한다.
+        generate-ddl: false # DDL 정의시 데이터베이스의 고유 기능을 사용합니다. ex) 테이블 생성, 삭제 등
+        hibernate: 
+            ddl-auto: validate
+        properties: 
+            hibernate: 
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    datasource: # MySQL 설정
+        url: jdbc:mysql://localhost:13306/msa_example?serverTimezone=Asia/Seoul
+        username: user
+        password: user123
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        initialization-mode: never
+eureka:
+    client: 
+        serviceUrl: 
+            defaultZone: http://localhost:18761/eureka/
+jwt:
+  base64-secret: ZmQ0ZGI5NjQ0MDQwY2I4MjMxY2Y3ZmI3MjdhN2ZmMjNhODViOTg1ZGE0NTBjMGM4NDA5NzYxMjdjOWMwYWRmZTBlZjlhNGY3ZTg4Y2U3YTE1ODVkZDU5Y2Y3OGYwZWE1NzUzNWQ2YjFjZDc0NGMxZWU2MmQ3MjY1NzJmNTE0MzI=
+
+
+--- # dev 설정
+spring:
+    profiles: dev
+    datasource: # MySQL 설정
+        url: jdbc:mysql://localhost:13306/CCTV_SERVICE?serverTimezone=Asia/Seoul
+eureka:
+    client: 
+        serviceUrl: 
+            defaultZone: http://localhost:18761/eureka/

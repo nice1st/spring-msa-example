@@ -9,11 +9,8 @@ include 'msa-gateway'
 project(':msa-gateway').projectDir = file('subproject/msa-gateway')
 include 'msa-auth'
 project(':msa-auth').projectDir = file('subproject/msa-auth')
-// include 'msa-news'
-// project(':msa-news').projectDir = file('subproject/msa-news')
-// include 'msa-review'
-// project(':msa-review').projectDir = file('subproject/msa-review')
+
 include 'msa-user'
 project(':msa-user').projectDir = file('subproject/msa-user')
-// include 'msa-advertising'
-// project(':msa-advertising').projectDir = file('subproject/msa-advertising')
+include 'msa-log'
+project(':msa-log').projectDir = file('subproject/msa-log')
