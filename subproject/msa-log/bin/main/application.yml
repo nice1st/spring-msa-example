@@ -21,6 +21,21 @@ spring:
         password: user123
         driver-class-name: com.mysql.cj.jdbc.Driver
         initialization-mode: never
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+    cloud:
+        stream:
+            rabbit:
+                bindings:
+                    user-update:
+                        consumer:
+                            exchangeType: fanout
+                            exchangeAutoDelete: true
+                            ttl: 61000
+                            maxConcurrency: 1
 eureka:
     client: 
         serviceUrl: 

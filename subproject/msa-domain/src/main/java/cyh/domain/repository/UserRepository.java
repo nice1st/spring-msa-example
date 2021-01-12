@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import cyh.domain.entity.User;
 
-@Repository ("UserDao")
-public interface UserDao extends JpaRepository<User, Integer> {
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUserId(String userId);
 }

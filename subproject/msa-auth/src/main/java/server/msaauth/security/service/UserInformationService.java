@@ -13,19 +13,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import cyh.domain.entity.User;
-import cyh.domain.repository.UserDao;
+import cyh.domain.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import server.msaauth.security.entity.UserInformation;
 
+@RequiredArgsConstructor
 @Service
 public class UserInformationService implements UserDetailsService {
 
-    @Resource (name="UserDao")
-    private UserDao UserDao;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        User user = UserDao.findByUserId(username);
+        User user = userRepository.findByUserId(username);
 
         // 저장된 ID가 없을때 throw 시켜줍니다. 
         if(user == null) {
