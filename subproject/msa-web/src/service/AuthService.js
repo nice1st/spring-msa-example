@@ -27,7 +27,7 @@ export default class AuthService {
         }).then(self.onResponse);
     }
     
-    onSilentRefresh() {
+    onRefresh() {
         const self = this;
 
         return fetch(`${AUTH_URL}/auth/token/refresh`, {

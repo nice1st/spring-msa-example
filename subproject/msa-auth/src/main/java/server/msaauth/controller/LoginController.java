@@ -60,6 +60,9 @@ public class LoginController {
         }
         // 쿠키
         JwtAuthToken jwtAuthToken = loginService.convertAuthToken(reqRefreshToken);
+        if(!jwtAuthToken.validate()) {
+            throw new TokenValidFailedException();
+        }
         UserDetails user = loginService.getUserInformationByToken(jwtAuthToken);
         // user.getAuthorities().stream().forEach((authority) -> {
         //     log.info(authority.getAuthority());

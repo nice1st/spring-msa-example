@@ -22,7 +22,7 @@ export default class FetchUtil {
         return Object.assign({}, defaultHeaders, headers);
     }
 
-    static get(url, param = {}, headers = {}) {
+    static get(url, param = {}, headers = {}, retry = 0) {
         const _url = new URL(url, this.getBaseUrl(url));
         _url.search = new URLSearchParams(param);
         return fetch(_url, {
@@ -31,18 +31,15 @@ export default class FetchUtil {
         }).then(FetchUtil.onResponse)
         .catch(error => {
             if (error.status == 403) {
-                return FetchUtil.refreshToken()
-                .then(authRes => FetchUtil.get(url, param, headers))
-                .catch(authError => {
-                    window.location.href = "/login";
-                });
+                return FetchUtil.refreshToken(retry)
+                .then(authRes => FetchUtil.get(url, param, headers, ++retry));
             } else {
                 throw error;
             }
         });
     }
 
-    static post(url, param = {}, headers = {}) {
+    static post(url, param = {}, headers = {}, retry = 0) {
         const _url = new URL(url, this.getBaseUrl(url));
         return fetch(_url, {
             method: "POST",
@@ -51,11 +48,8 @@ export default class FetchUtil {
         }).then(FetchUtil.onResponse)
         .catch(error => {
             if (error.status == 403) {
-                return FetchUtil.refreshToken()
-                .then(authRes => FetchUtil.post(url, param, headers))
-                .catch(authError => {
-                    window.location.href = "/login";
-                });
+                return FetchUtil.refreshToken(retry)
+                .then(authRes => FetchUtil.post(url, param, headers, ++retry));
             } else {
                 throw error;
             }
@@ -77,7 +71,14 @@ export default class FetchUtil {
         })
     }
 
-    static refreshToken() {
-        return AuthService.getInstance().onSilentRefresh();
+    static refreshToken(retry) {
+        if (retry > 3) {
+            console.error(`refreshToken retry :: ${retry}`);
+            window.location.href = "/login";
+        }
+        return AuthService.getInstance().onRefresh()
+        .catch(authError => {
+            window.location.href = "/login";
+        });
     }
 }

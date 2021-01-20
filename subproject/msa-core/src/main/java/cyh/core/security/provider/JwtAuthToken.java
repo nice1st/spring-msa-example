@@ -54,7 +54,7 @@ public class JwtAuthToken {
         var token = Jwts.builder()
                 .setSubject(id)
                 .claim(AUTHORITIES_KEY, role)
-                .signWith(key, SignatureAlgorithm.HS256)
+                .signWith(this.key, SignatureAlgorithm.HS256)
                 .setExpiration(expiredDate)
                 .compact();
 
