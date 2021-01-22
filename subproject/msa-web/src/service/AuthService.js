@@ -1,4 +1,4 @@
-import FetchUtil, {AUTH_URL} from '../util/FetchUtil';
+import FetchService, {AUTH_URL} from './FetchService';
 
 export default class AuthService {
     static instance = null;
@@ -44,7 +44,7 @@ export default class AuthService {
         return response.json()
         .then(response => {
             try {
-                FetchUtil.token = response.message;
+                FetchService.getInstance().token = response.message;
             } catch (error) {
                 console.error(error);
             }

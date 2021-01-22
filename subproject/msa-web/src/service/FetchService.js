@@ -1,20 +1,29 @@
-import AuthService from '../service/AuthService';
+import AuthService from './AuthService';
 
 export const BASE_URL = process.env.BASE_URL;
 export const AUTH_URL = process.env.AUTH_URL;
 export let TOKEN = undefined;
 
-export default class FetchUtil {
-    
-    static set token(token) {
+export default class FetchService {
+    static instance = null;
+
+    static getInstance() {
+        if (FetchService.instance == null) {
+            FetchService.instance = new FetchService();
+        }
+
+        return FetchService.instance;
+    }
+
+    set token(token) {
         TOKEN = token;
     }
 
-    static getBaseUrl(url) {
+    getBaseUrl(url) {
         return url.startsWith("http") ? "" : BASE_URL;
     }
 
-    static getHeaders(headers) {
+    getHeaders(headers) {
         const defaultHeaders = {
             "Content-Type": "application/json; charset=UTF-8",
             "Authorization": TOKEN,
@@ -22,41 +31,43 @@ export default class FetchUtil {
         return Object.assign({}, defaultHeaders, headers);
     }
 
-    static get(url, param = {}, headers = {}, retry = 0) {
-        const _url = new URL(url, this.getBaseUrl(url));
+    get(url, param = {}, headers = {}, retry = 0) {
+        const self = this;
+        const _url = new URL(url, self.getBaseUrl(url));
         _url.search = new URLSearchParams(param);
         return fetch(_url, {
             method: "GET",
-            headers: this.getHeaders(headers)
-        }).then(FetchUtil.onResponse)
+            headers: self.getHeaders(headers)
+        }).then(self.onResponse)
         .catch(error => {
             if (error.status == 403) {
-                return FetchUtil.refreshToken(retry)
-                .then(authRes => FetchUtil.get(url, param, headers, ++retry));
+                return self.refreshToken(retry)
+                .then(authRes => self.get(url, param, headers, ++retry));
             } else {
                 throw error;
             }
         });
     }
 
-    static post(url, param = {}, headers = {}, retry = 0) {
-        const _url = new URL(url, this.getBaseUrl(url));
+    post(url, param = {}, headers = {}, retry = 0) {
+        const self = this;
+        const _url = new URL(url, self.getBaseUrl(url));
         return fetch(_url, {
             method: "POST",
-            headers: this.getHeaders(headers),
+            headers: self.getHeaders(headers),
             body: JSON.stringify(param)
-        }).then(FetchUtil.onResponse)
+        }).then(self.onResponse)
         .catch(error => {
             if (error.status == 403) {
-                return FetchUtil.refreshToken(retry)
-                .then(authRes => FetchUtil.post(url, param, headers, ++retry));
+                return self.refreshToken(retry)
+                .then(authRes => self.post(url, param, headers, ++retry));
             } else {
                 throw error;
             }
         });
     }
 
-    static onResponse(res) {
+    onResponse(res) {
         if (res.status != 200) {
             throw res; // 에러는 밖에서 처리
         }
@@ -71,7 +82,7 @@ export default class FetchUtil {
         })
     }
 
-    static refreshToken(retry) {
+    refreshToken(retry) {
         if (retry > 3) {
             console.error(`refreshToken retry :: ${retry}`);
             window.location.href = "/login";
