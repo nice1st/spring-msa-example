@@ -4,12 +4,12 @@ const path = require("path")
 module.exports = {
     entry: {
         app: path.resolve(__dirname + "/src/index.js"),
-        service: path.resolve(__dirname + "/src/service/index.js"),
-        router: path.resolve(__dirname + "/src/router/router.js"),
     },
     output: {
         path: path.resolve(__dirname + "/dist"),
         filename: '[name].js',
+        // library: "service",
+        // libraryTarget: "umd",
     },
     module: {
         rules: [

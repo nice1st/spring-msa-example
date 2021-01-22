@@ -85,11 +85,11 @@ export default class FetchService {
     refreshToken(retry) {
         if (retry > 3) {
             console.error(`refreshToken retry :: ${retry}`);
-            window.location.href = "/main#login";
+            window.location.href = "#login";
         }
         return AuthService.getInstance().onRefresh()
         .catch(authError => {
-            window.location.href = "/main#login";
+            window.location.href = "#login";
         });
     }
 }

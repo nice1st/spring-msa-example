@@ -9,5 +9,11 @@ pushRoute(appDiv);
 
 window.onload = () => {
     // route #anything
-    window.addEventListener("hashchange", () => { pushRoute(appDiv) }, false)
+    window.addEventListener("hashchange", () => { pushRoute(appDiv) }, false);
 }
+
+const register = async () => {
+    // custom element 를 여기서 해야 하나?
+};
+
+document.addEventListener("DOMContentLoaded", register);

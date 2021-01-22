@@ -1,12 +1,14 @@
+import {registerLogin} from '../page/login';
+
 const routes = {
     '': require('../page/about.html'),
-    '#login': require('../page/login.html'),
+    '#login': registerLogin(),
     '#home': require('../page/home.html'),
 }
 
 // render
 function renderHTML(el, route) {
-    el.innerHTML = route;
+    el.appendChild(route);
 }
 
 export function pushRoute(el) {
