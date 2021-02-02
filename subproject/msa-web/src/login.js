@@ -1,6 +1,9 @@
 import {Login} from './page/index.js'
 
 window.onload = () => {
+    document.querySelector("page-login").addEventListener("login-success", (e) => {
+        window.location.href = "/main";
+    });
 }
 
 const register = async () => {

@@ -7,6 +7,7 @@ export default class Footer extends HTMLElement {
         shadow.innerHTML = require('./template/menubar.html');
 
         var style = document.createElement('style');
+        
         shadow.appendChild(style);
     }
     

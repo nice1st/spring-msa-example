@@ -1,5 +1,7 @@
 const routes = {
+    '': document.createElement('page-about'),
     '#about': document.createElement('page-about'),
+    '#home': document.createElement('page-home'),
 }
 
 // render
