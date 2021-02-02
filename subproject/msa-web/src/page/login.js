@@ -1,6 +1,6 @@
 import AuthService from '../service/AuthService';
 
-export class Login extends HTMLElement {
+export default class Login extends HTMLElement {
     constructor() {
         // 항상 생성자에서 super는 처음으로 호출됩니다
         super();
@@ -9,7 +9,7 @@ export class Login extends HTMLElement {
         var shadow = this.attachShadow({mode: 'open'});
 
         var div = document.createElement('div');
-        div.innerHTML = require('./login.html');
+        div.innerHTML = require('./template/login.html');
         var style = document.createElement('style');
         shadow.appendChild(style);
         shadow.appendChild(div);
@@ -49,7 +49,8 @@ export class Login extends HTMLElement {
     
 
     onLogin = (event) => {
-        AuthService.getInstance().onLogin(document.getElementById("id").value, document.getElementById("password").value)
+        const self = this;
+        AuthService.getInstance().onLogin(this.shadowRoot.querySelector("#id").value, this.shadowRoot.querySelector("#password").value)
         .then(res => {
             console.log(res);
             window.location.href = "#home";
@@ -63,5 +64,3 @@ export class Login extends HTMLElement {
         .catch(error => console.log(error));
     }
 }
-
-export const registerLogin = () => customElements.define('login-page', Login);

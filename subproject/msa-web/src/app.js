@@ -1,4 +1,3 @@
-// router
 import {pushRoute} from './router/router.js'
 import {About} from './page/index.js'
 import {Contents, Footer, Menubar} from './container/index.js'

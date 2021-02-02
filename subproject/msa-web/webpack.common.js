@@ -3,7 +3,8 @@ const path = require("path")
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname + "/src/index.js"),
+        app: path.resolve(__dirname + "/src/app.js"),
+        login: path.resolve(__dirname + "/src/login.js"),
     },
     output: {
         path: path.resolve(__dirname + "/dist"),
