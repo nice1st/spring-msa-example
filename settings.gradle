@@ -1,16 +1,17 @@
 rootProject.name = 'spring-msa-example'
-include 'msa-core'
-project(':msa-core').projectDir = file('subproject/msa-core')
-include 'msa-domain'
-project(':msa-domain').projectDir = file('subproject/msa-domain')
-include 'msa-eureka'
-project(':msa-eureka').projectDir = file('subproject/msa-eureka')
-include 'msa-gateway'
-project(':msa-gateway').projectDir = file('subproject/msa-gateway')
-include 'msa-auth'
-project(':msa-auth').projectDir = file('subproject/msa-auth')
+include 'core'
+project(':core').projectDir = file('subproject/core')
+include 'domain'
+project(':domain').projectDir = file('subproject/domain')
 
-include 'msa-user'
-project(':msa-user').projectDir = file('subproject/msa-user')
-include 'msa-log'
-project(':msa-log').projectDir = file('subproject/msa-log')
+include 'server.eureka'
+project(':server.eureka').projectDir = file('subproject/server/eureka')
+include 'server.gateway'
+project(':server.gateway').projectDir = file('subproject/server/gateway')
+include 'server.auth'
+project(':server.auth').projectDir = file('subproject/server/auth')
+
+include 'app.api.user'
+project(':app.api.user').projectDir = file('subproject/app/api/user')
+include 'app.api.log'
+project(':app.api.log').projectDir = file('subproject/app/api/log')

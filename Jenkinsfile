@@ -15,12 +15,9 @@ pipeline {
         }
         stage('Docker build') {
             steps {
-                dir("subproject/msa-news") {
+                dir("subproject/app/api/user") {
                     // 이미지 뒤에 :버전(:날짜) 붙여야 됨
-                    sh 'docker build -t app-api-msa-news-image .'
-                }
-                dir("subproject/msa-review") {
-                    sh 'docker build -t app-api-msa-review-image .'
+                    sh 'docker build -t app-api-user-image .'
                 }
             }
         }
