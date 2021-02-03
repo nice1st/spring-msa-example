@@ -28,8 +28,8 @@ public class JwtAuthTokenProvider {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public JwtAuthToken createAuthToken(String id, String role, Date expiredDate) {
-        return new JwtAuthToken(id, role, expiredDate, key);
+    public JwtAuthToken createAuthToken(String id, String[] roles, Date expiredDate) {
+        return new JwtAuthToken(id, roles, expiredDate, key);
     }
 
     public JwtAuthToken convertAuthToken(String token) {

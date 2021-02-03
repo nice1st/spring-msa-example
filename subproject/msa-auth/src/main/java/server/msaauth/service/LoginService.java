@@ -4,10 +4,12 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -55,7 +57,8 @@ public class LoginService {
 
     public JwtAuthToken createAuthToken(UserDetails user, long LOGIN_RETENTION_MINUTES) {
         Date expiredDate = Date.from(LocalDateTime.now().plusMinutes(LOGIN_RETENTION_MINUTES).atZone(ZoneId.systemDefault()).toInstant());
-        return jwtAuthTokenProvider.createAuthToken(user.getUsername(), "USER", expiredDate);
+        String[] roles = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()).toArray(new String[0]);
+        return jwtAuthTokenProvider.createAuthToken(user.getUsername(), roles, expiredDate);
     }
 
     public JwtAuthToken convertAuthToken(String authToken) {

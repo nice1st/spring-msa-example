@@ -23,9 +23,9 @@ public class JwtAuthToken {
         this.key = key;
     }
 
-    JwtAuthToken(String id, String role, Date expiredDate, Key key) {
+    JwtAuthToken(String id, String[] roles, Date expiredDate, Key key) {
         this.key = key;
-        this.token = createJwtAuthToken(id, role, expiredDate).get();
+        this.token = createJwtAuthToken(id, roles, expiredDate).get();
     }
 
     public boolean validate() {
@@ -49,11 +49,11 @@ public class JwtAuthToken {
         return null;
     }
 
-    private Optional<String> createJwtAuthToken(String id, String role, Date expiredDate) {
+    private Optional<String> createJwtAuthToken(String id, String[] roles, Date expiredDate) {
 
         var token = Jwts.builder()
                 .setSubject(id)
-                .claim(AUTHORITIES_KEY, role)
+                .claim(AUTHORITIES_KEY, roles)
                 .signWith(this.key, SignatureAlgorithm.HS256)
                 .setExpiration(expiredDate)
                 .compact();
