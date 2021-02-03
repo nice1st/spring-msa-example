@@ -47,7 +47,6 @@ export default class Login extends HTMLElement {
         this.shadowRoot.querySelector("#refresh").addEventListener("click", this.onRefresh);
     }
     
-
     onLogin = (event) => {
         const self = this;
         AuthService.getInstance().onLogin(self.shadowRoot.querySelector("#id").value, self.shadowRoot.querySelector("#password").value)
