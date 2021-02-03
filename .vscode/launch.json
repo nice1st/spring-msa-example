@@ -12,72 +12,31 @@
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-DemoApplication<demo>",
-            "request": "launch",
-            "mainClass": "com.example.demo.DemoApplication",
-            "projectName": "demo"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaAdvertisingApplication<msa-advertising>",
-            "request": "launch",
-            "mainClass": "server.msaadvertising.MsaAdvertisingApplication",
-            "projectName": "msa-advertising"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaAuthApplication<msa-auth>",
+            "name": "Debug (Launch)-MsaAuthApplication<auth>",
             "request": "launch",
             "mainClass": "server.msaauth.MsaAuthApplication",
-            "projectName": "msa-auth"
+            "projectName": "auth"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-MsaEurekaApplication<msa-eureka>",
+            "name": "Debug (Launch)-MsaEurekaApplication<eureka>",
             "request": "launch",
             "mainClass": "server.msaeureka.MsaEurekaApplication",
-            "projectName": "msa-eureka"
+            "projectName": "eureka"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-MsaGatewayApplication<msa-gateway>",
+            "name": "Debug (Launch)-MsaGatewayApplication<gateway>",
             "request": "launch",
             "mainClass": "server.msagateway.MsaGatewayApplication",
-            "projectName": "msa-gateway"
+            "projectName": "gateway"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-MsaNewsApplication<msa-news>",
-            "request": "launch",
-            "mainClass": "server.msanews.MsaNewsApplication",
-            "projectName": "msa-news"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaReviewApplication<msa-review>",
-            "request": "launch",
-            "mainClass": "server.msareview.MsaReviewApplication",
-            "projectName": "msa-review"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaUserApplication<msa-user>",
+            "name": "Debug (Launch)-MsaUserApplication<user>",
             "request": "launch",
             "mainClass": "server.msauser.MsaUserApplication",
-            "projectName": "msa-user"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaWebApplication<msa-web>",
-            "request": "launch",
-            "mainClass": "web.msaweb.MsaWebApplication",
-            "projectName": "msa-web"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaAdvertisingApplication",
-            "request": "launch",
-            "mainClass": "server.msaadvertising.MsaAdvertisingApplication"
+            "projectName": "user"
         },
         {
             "type": "java",

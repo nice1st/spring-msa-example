@@ -3,7 +3,7 @@ server:
 
 spring:
     application: 
-        name: msa-user-service #eureka 에 등록 됨 #gateway 설정에 route 추가
+        name: app-api-user #eureka 에 등록 됨 #gateway 설정에 route 추가
     profiles: 
         active: local
     jpa: 

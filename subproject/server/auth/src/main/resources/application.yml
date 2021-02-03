@@ -3,7 +3,7 @@ server:
 
 spring:
     application: 
-        name: msa-auth-service
+        name: server-auth
     profiles: 
         active: local
     jpa: 

@@ -3,10 +3,10 @@
 # server.port = 18090
 server:
     port: 18090
-# spring.application.name=msa-gateway
+# spring.application.name=server-gateway
 spring:
     application:
-        name: msa-gateway
+        name: server-gateway
 
 # eureka.client.serviceUrl.defaultZone=http://localhost:18761/eureka/
 eureka:
@@ -14,14 +14,14 @@ eureka:
         serviceUrl:
             defaultZone: http://localhost:18761/eureka/
 
-# zuul.routes.msa-user-service.path=/api/user/**
+# zuul.routes.app-api-user.path=/api/user/**
 # zuul.sensitiveHeaders= Cookie,Set-Cookie
 zuul:
     sensitive-headers: Cookie,Set-Cookie
     routes:
-        msa-user-service:
+        app-api-user:
             path: /api/user/**
-        msa-log-service:
+        app-api-log:
             path: /api/log/**
             
 jwt:

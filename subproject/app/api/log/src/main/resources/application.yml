@@ -3,7 +3,7 @@ server:
 
 spring:
     application: 
-        name: msa-log-service
+        name: app-api-log
     profiles: 
         active: local
     jpa: 
