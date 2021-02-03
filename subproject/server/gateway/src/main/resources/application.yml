@@ -1,27 +1,20 @@
-# application.properties
-
-# server.port = 18090
 server:
     port: 18090
-# spring.application.name=server-gateway
 spring:
     application:
-        name: server-gateway
+        name: cyh-msa-server-gateway
 
-# eureka.client.serviceUrl.defaultZone=http://localhost:18761/eureka/
 eureka:
     client:
         serviceUrl:
             defaultZone: http://localhost:18761/eureka/
 
-# zuul.routes.app-api-user.path=/api/user/**
-# zuul.sensitiveHeaders= Cookie,Set-Cookie
 zuul:
     sensitive-headers: Cookie,Set-Cookie
     routes:
-        app-api-user:
+        cyh-msa-app-api-user:
             path: /api/user/**
-        app-api-log:
+        cyh-msa-app-api-log:
             path: /api/log/**
             
 jwt:

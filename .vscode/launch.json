@@ -10,45 +10,5 @@
             "request": "launch",
             "mainClass": "${file}"
         },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaAuthApplication<auth>",
-            "request": "launch",
-            "mainClass": "server.msaauth.MsaAuthApplication",
-            "projectName": "auth"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaEurekaApplication<eureka>",
-            "request": "launch",
-            "mainClass": "server.msaeureka.MsaEurekaApplication",
-            "projectName": "eureka"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaGatewayApplication<gateway>",
-            "request": "launch",
-            "mainClass": "server.msagateway.MsaGatewayApplication",
-            "projectName": "gateway"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaUserApplication<user>",
-            "request": "launch",
-            "mainClass": "server.msauser.MsaUserApplication",
-            "projectName": "user"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaAuthApplication",
-            "request": "launch",
-            "mainClass": "server.msaauth.MsaAuthApplication"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-MsaNewsApplication",
-            "request": "launch",
-            "mainClass": "server.msanews.MsaNewsApplication"
-        }
     ]
 }

@@ -12,7 +12,7 @@ buildscript {
 }
 
 allprojects {
-    group = 'cyh.msa-example'
+    group = 'cyh.msa'
     version = '0.0.1-SNAPSHOT'
 }
 

@@ -3,7 +3,7 @@ server:
 
 spring:
     application: 
-        name: server-auth
+        name: cyh-msa-server-auth
     profiles: 
         active: local
     jpa: 

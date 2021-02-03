@@ -1,17 +1,17 @@
 rootProject.name = 'spring-msa-example'
-include 'core'
-project(':core').projectDir = file('subproject/core')
-include 'domain'
-project(':domain').projectDir = file('subproject/domain')
+include 'cyh-msa-core'
+project(':cyh-msa-core').projectDir = file('subproject/core')
+include 'cyh-msa-domain'
+project(':cyh-msa-domain').projectDir = file('subproject/domain')
 
-include 'server.eureka'
-project(':server.eureka').projectDir = file('subproject/server/eureka')
-include 'server.gateway'
-project(':server.gateway').projectDir = file('subproject/server/gateway')
-include 'server.auth'
-project(':server.auth').projectDir = file('subproject/server/auth')
+include 'cyh-msa-server-eureka'
+project(':cyh-msa-server-eureka').projectDir = file('subproject/server/eureka')
+include 'cyh-msa-server-gateway'
+project(':cyh-msa-server-gateway').projectDir = file('subproject/server/gateway')
+include 'cyh-msa-server-auth'
+project(':cyh-msa-server-auth').projectDir = file('subproject/server/auth')
 
-include 'app.api.user'
-project(':app.api.user').projectDir = file('subproject/app/api/user')
-include 'app.api.log'
-project(':app.api.log').projectDir = file('subproject/app/api/log')
+include 'cyh-msa-app-api-user'
+project(':cyh-msa-app-api-user').projectDir = file('subproject/app/api/user')
+include 'cyh-msa-app-api-log'
+project(':cyh-msa-app-api-log').projectDir = file('subproject/app/api/log')
