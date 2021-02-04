@@ -17,7 +17,7 @@ import cyh.msa.core.security.handler.JwtAuthenticationEntryPoint;
 import cyh.msa.core.security.provider.JwtAuthTokenProvider;
 
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "cyh.core.security")
+@ComponentScan(basePackages = "cyh.msa.core.security")
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -33,11 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable()
 
-                // .exceptionHandling()
-                // .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                // .accessDeniedHandler(jwtAccessDeniedHandler)
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
 
-                // .and()
+                .and()
                 .headers()
                 .frameOptions()
                 .sameOrigin()

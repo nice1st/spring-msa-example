@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @EnableDiscoveryClient
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@ComponentScan(basePackages = "cyh.msa")
+@ComponentScan(basePackages = "cyh.msa.app.api.log")
 @EntityScan("cyh.msa.domain")
 @EnableJpaRepositories("cyh.msa.domain")
 public class MsaLogApplication {

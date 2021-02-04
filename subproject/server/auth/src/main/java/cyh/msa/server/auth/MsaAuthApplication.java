@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "server.msaauth")
-@ComponentScan(basePackages = "cyh.core.handler", includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = ControllerAdvice.class))
-@EntityScan("cyh.domain")
-@EnableJpaRepositories("cyh.domain")
+@ComponentScan(basePackages = "cyh.msa.server.auth")
+@ComponentScan(basePackages = "cyh.msa.core.handler", includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = ControllerAdvice.class))
+@EntityScan("cyh.msa.domain")
+@EnableJpaRepositories("cyh.msa.domain")
 public class MsaAuthApplication {
 
 	public static void main(String[] args) {
