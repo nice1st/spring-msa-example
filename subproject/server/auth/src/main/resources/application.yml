@@ -29,4 +29,4 @@ jwt:
 spring:
     profiles: dev
     datasource: # MySQL 설정
-        url: jdbc:mysql://localhost:13306/CCTV_SERVICE?serverTimezone=Asia/Seoul
+        url: jdbc:mysql://localhost:13306/msa_example?serverTimezone=Asia/Seoul
