@@ -3,8 +3,7 @@ package cyh.msa.server.auth.security.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,8 +13,7 @@ import org.springframework.stereotype.Service;
 
 import cyh.msa.domain.entity.User;
 import cyh.msa.domain.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import cyh.msa.server.auth.security.entity.UserInformation;
+import cyh.example.springsecurity.entity.UserInformation;
 
 @RequiredArgsConstructor
 @Service

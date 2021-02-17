@@ -15,3 +15,10 @@ include 'cyh-msa-app-api-user'
 project(':cyh-msa-app-api-user').projectDir = file('subproject/app/api/user')
 include 'cyh-msa-app-api-log'
 project(':cyh-msa-app-api-log').projectDir = file('subproject/app/api/log')
+
+include 'cyh-spring-boot-starter'
+project(':cyh-spring-boot-starter').projectDir = file('subproject/spring-boot-starter/cyh-spring-boot-starter')
+include 'cyh-spring-boot-autoconfigure'
+project(':cyh-spring-boot-autoconfigure').projectDir = file('subproject/spring-boot-starter/cyh-spring-boot-autoconfigure')
+include 'spring-security-jwt'
+project(':spring-security-jwt').projectDir = file('subproject/spring-boot-starter/spring-security-jwt')

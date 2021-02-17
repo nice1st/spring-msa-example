@@ -10,15 +10,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import cyh.example.springsecurity.jwt.JwtAuthToken;
+import cyh.example.springsecurity.jwt.JwtAuthTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import cyh.msa.core.security.provider.JwtAuthToken;
-import cyh.msa.core.security.provider.JwtAuthTokenProvider;
 
 @Slf4j
 @Service

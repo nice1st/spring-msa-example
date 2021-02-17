@@ -6,9 +6,16 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MsaLogApplication",
+            "request": "launch",
+            "mainClass": "cyh.msa.app.api.log.MsaLogApplication",
+            "projectName": "cyh-msa-app-api-log"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
+        }
     ]
 }

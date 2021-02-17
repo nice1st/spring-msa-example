@@ -12,11 +12,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import cyh.msa.core.response.CommonResponse;
-import cyh.msa.core.security.provider.JwtAuthToken;
 import cyh.msa.core.exception.LoginFailedException;
 import cyh.msa.core.exception.TokenValidFailedException;
 import cyh.msa.server.auth.service.LoginService;
 import cyh.msa.server.auth.dto.LoginRequestDTO;
+import cyh.example.springsecurity.jwt.JwtAuthToken;
 
 @Slf4j
 @RestController
