@@ -21,8 +21,11 @@ spring:
         password: user123
         driver-class-name: com.mysql.cj.jdbc.Driver
         initialization-mode: never
-jwt:
-    base64-secret: c2VjcmV0MTJzZWNyZXQxMnNlY3JldDEyc2VjcmV0MTI=
+
+cyh:
+  security:
+    jwt:
+      base64Secret: c2VjcmV0MTJzZWNyZXQxMnNlY3JldDEyc2VjcmV0MTI=
 
 
 --- # dev 설정

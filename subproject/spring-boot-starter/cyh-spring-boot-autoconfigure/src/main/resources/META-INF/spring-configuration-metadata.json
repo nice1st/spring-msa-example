@@ -1,0 +1,10 @@
+{
+    "properties": [
+      {
+        "sourceType": "cyh.example.springboot.security.properties.CyhSecuriryJwtProperties",
+        "name": "cyh.security.jwt.base64Secret",
+        "type": "java.lang.String",
+        "description": "jwt key"
+      }
+    ]
+  }

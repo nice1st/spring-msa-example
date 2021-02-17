@@ -2,6 +2,7 @@ dependencies {
 	implementation project(':cyh-msa-core')
 	implementation project(':cyh-msa-domain')
 	implementation project(':cyh-spring-boot-starter')
+	implementation project(':spring-security-jwt')
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

@@ -12,12 +12,20 @@ dependencies {
     implementation project(':cyh-msa-core')
     
     implementation 'org.springframework.security:spring-security-config'
-    // implementation 'org.springframework.security:spring-security-web'
+    implementation 'org.springframework.security:spring-security-web'
+
+    compileOnly 'javax.servlet:servlet-api:2.3'
 
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     runtime 'io.jsonwebtoken:jjwt-impl:0.11.2'
     runtime 'io.jsonwebtoken:jjwt-jackson:0.11.2'
 
     compileOnly 'org.projectlombok:lombok'
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+	annotationProcessor 'org.projectlombok:lombok'
+    
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 }

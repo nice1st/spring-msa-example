@@ -2,6 +2,8 @@ package cyh.example.springboot.security.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,18 +22,19 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import lombok.RequiredArgsConstructor;
 
 import cyh.example.springboot.security.handler.JwtAuthenticationEntryPoint;
+import cyh.example.springboot.security.properties.CyhSecuriryJwtProperties;
 import cyh.example.springsecurity.jwt.JWTConfigurer;
 import cyh.example.springsecurity.jwt.JwtAuthTokenProvider;
 import cyh.example.springboot.security.handler.JwtAccessDeniedHandler;
 
-@RequiredArgsConstructor
 @EnableWebSecurity
+@RequiredArgsConstructor
+@ConditionalOnProperty(prefix = "cyh.security.jwt", name = {"base64Secret"})
+@EnableConfigurationProperties(CyhSecuriryJwtProperties.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final HandlerExceptionResolver handlerExceptionResolver;
-
-    @Value("${jwt.base64-secret}")
-    private String base64Secret;
+    private final CyhSecuriryJwtProperties cyhSecuriryJwtProperties;
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -71,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Bean
     public JwtAuthTokenProvider jwtProvider() {
-        return new JwtAuthTokenProvider(base64Secret);
+        return new JwtAuthTokenProvider(cyhSecuriryJwtProperties.getBase64Secret());
     }
 
     @Bean
