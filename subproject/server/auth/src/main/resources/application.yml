@@ -27,7 +27,6 @@ cyh:
     jwt:
       base64Secret: c2VjcmV0MTJzZWNyZXQxMnNlY3JldDEyc2VjcmV0MTI=
 
-
 --- # dev 설정
 spring:
     profiles: dev

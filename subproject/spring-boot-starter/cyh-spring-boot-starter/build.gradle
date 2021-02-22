@@ -10,7 +10,6 @@ jar {
 
 dependencies {
     implementation project(':cyh-spring-boot-autoconfigure')
-    implementation project(':spring-security-jwt')
 
     implementation 'org.springframework.boot:spring-boot-starter'
 }

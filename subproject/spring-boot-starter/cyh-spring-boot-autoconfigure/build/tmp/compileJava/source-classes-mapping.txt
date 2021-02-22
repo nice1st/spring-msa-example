@@ -2,7 +2,7 @@ cyh/example/springboot/security/handler/JwtAuthenticationEntryPoint.java
  cyh.example.springboot.security.handler.JwtAuthenticationEntryPoint
 cyh/example/springboot/security/handler/JwtAccessDeniedHandler.java
  cyh.example.springboot.security.handler.JwtAccessDeniedHandler
-cyh/example/springboot/security/config/WebSecurityConfig.java
- cyh.example.springboot.security.config.WebSecurityConfig
 cyh/example/springboot/security/properties/CyhSecuriryJwtProperties.java
  cyh.example.springboot.security.properties.CyhSecuriryJwtProperties
+cyh/example/springboot/security/config/WebSecurityConfig.java
+ cyh.example.springboot.security.config.WebSecurityConfig

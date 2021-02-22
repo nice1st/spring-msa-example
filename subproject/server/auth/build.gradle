@@ -1,7 +1,9 @@
 dependencies {
 	implementation project(':cyh-msa-core')
 	implementation project(':cyh-msa-domain')
-	implementation project(':cyh-spring-boot-starter')
+	// implementation project(':cyh-spring-boot-starter')
+	implementation fileTree(dir: "${project.rootDir}/subproject/spring-boot-starter/cyh-spring-boot-autoconfigure/build/libs", include: ['*.jar'])
+	implementation fileTree(dir: "${project.rootDir}/subproject/spring-boot-starter/cyh-spring-boot-starter/build/libs", include: ['*.jar'])
 	implementation project(':spring-security-jwt')
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
